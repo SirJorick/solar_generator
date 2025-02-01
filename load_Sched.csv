@@ -1,0 +1,3 @@
+Appliance,Rated Power (W),Power Factor (PF),Efficiency (%),Surge Power (W),Usage Hours,Appliance Count,Consumption (kWh)
+3D Printer,"1,021.0",0.95,94,"3,063.0",1.0,1,0.9118
+Air Compressor (1HP),750.0,0.92,88,"2,250.0",1.0,1,0.6072
