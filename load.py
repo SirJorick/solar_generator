@@ -237,7 +237,7 @@ def save_to_json_and_csv():
             "Efficiency (%)", "Surge Power (W)", "Usage Hours",
             "Appliance Count", "Consumption (kWh)"
         ])
-        df.to_csv("Appliance_Consumption_Data.csv", index=False)
+        df.to_csv("load_Sched.csv", index=False)
 
         # Optionally, also save the load schedule CSV
         df.to_csv("load_Sched.csv", index=False)
@@ -306,7 +306,7 @@ usage_hours_combobox.grid(row=2, column=1, padx=5, pady=5)
 counts_label = ttk.Label(frame1, text="Appliance Count:")
 counts_label.grid(row=2, column=2, padx=5, pady=5)
 
-counts_combobox = ttk.Combobox(frame1, values=[str(i) for i in range(1, 11)], width=10)
+counts_combobox = ttk.Combobox(frame1, values=[str(i) for i in range(1, 21)], width=20)
 counts_combobox.set("1")
 counts_combobox.grid(row=2, column=3, padx=5, pady=5)
 
