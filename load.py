@@ -193,60 +193,63 @@ def remove_appliance():
     for item in selected_items:
         tree.delete(item)
 
-
-def save_to_csv():
+# Function to save data to JSON and CSV
+def save_to_json_and_csv():
     # Disable the Save button to prevent multiple triggers
     save_button.config(state="disabled")
 
-    # Check if there are any rows in the Treeview
-    if not tree.get_children():
-        messagebox.showwarning("No Data", "There are no appliances to save.")
-        save_button.config(state="normal")
-        return
-
-    # Get all rows from the Treeview
-    rows = [tree.item(row)['values'] for row in tree.get_children()]
-
-    # Convert to DataFrame and save as CSV
-    df = pd.DataFrame(
-        rows,
-        columns=[
-            "Appliance", "Rated Power (W)", "Power Factor (PF)", "Efficiency (%)",
-            "Surge Power (W)", "Usage Hours", "Appliance Count", "Consumption (kWh)"
-        ]
-    )
     try:
-        df.to_csv("load_Sched.csv", index=False)
+        # Check if there are any rows in the Treeview
+        if not tree.get_children():
+            messagebox.showwarning("No Data", "There is no data to save.")
+            return
 
-        # Calculate average usage hours
-        average_usage_time = total_usage_hours / appliance_count if appliance_count else 0
+        # Prepare data to be saved for CSV and to compute totals for JSON
+        data = []
+        total_wattage_csv = 0
+        total_usage_hours_csv = 0
+        appliance_count_csv = 0
 
-        # Prepare the totals data dictionary for JSON
-        data = {
-            "total_wattage": total_wattage,
-            "average_usage_hours": average_usage_time
+        for item in tree.get_children():
+            values = tree.item(item)['values']
+            data.append(values)
+
+            # Calculate total wattage and usage hours for CSV/JSON using tree values
+            # Note: values[1] is rated power (formatted with commas) and values[6] is appliance count.
+            total_wattage_csv += float(values[1].replace(",", "")) * float(values[6])
+            total_usage_hours_csv += float(values[5]) * float(values[6])
+            appliance_count_csv += int(values[6])
+
+        # Calculate average usage hours using the computed values
+        average_usage_hours_csv = total_usage_hours_csv / appliance_count_csv if appliance_count_csv else 0
+
+        # Save computed JSON data to total_load.json
+        json_data = {
+            "total_wattage": total_wattage_csv,
+            "average_usage_hours": average_usage_hours_csv
         }
-        # Save the totals to total_load.json
-        with open("total_load.json", "w") as f:
-            json.dump(data, f)
-    except Exception as e:
-        messagebox.showerror("Error", f"An error occurred while saving the data: {e}")
-        save_button.config(state="normal")
-        return
+        with open("total_load.json", "w") as json_file:
+            json.dump(json_data, json_file, indent=4)
 
-    # Get all rows from the Treeview
-    rows = []
-    for row in tree.get_children():
-        rows.append(tree.item(row)['values'])
+        # Convert data to DataFrame and save to CSV (Appliance Consumption Data)
+        df = pd.DataFrame(data, columns=[
+            "Appliance", "Rated Power (W)", "Power Factor (PF)",
+            "Efficiency (%)", "Surge Power (W)", "Usage Hours",
+            "Appliance Count", "Consumption (kWh)"
+        ])
+        df.to_csv("Appliance_Consumption_Data.csv", index=False)
 
-    # Convert to DataFrame and save as CSV
-    df = pd.DataFrame(rows, columns=["Appliance", "Rated Power (W)", "Power Factor (PF)", "Efficiency (%)",
-                                     "Surge Power (W)", "Usage Hours", "Appliance Count", "Consumption (kWh)"])
-    try:
+        # Optionally, also save the load schedule CSV
         df.to_csv("load_Sched.csv", index=False)
+
         messagebox.showinfo("Success", "Data has been saved successfully!")
+
     except Exception as e:
-        messagebox.showerror("Error", f"An error occurred while saving the data: {e}")
+        messagebox.showerror("Error", f"An error occurred while saving: {e}")
+
+    finally:
+        # Re-enable the Save button after saving is complete or if an error occurs
+        save_button.config(state="normal")
 
 # ---------------------
 # Layout Setup
@@ -341,7 +344,7 @@ action_frame = ttk.Frame(root, padding="5")
 action_frame.grid(row=2, column=0, pady=5, sticky="ew")
 
 # Save and Remove buttons
-save_button = ttk.Button(action_frame, text="Save", command=save_to_csv)
+save_button = ttk.Button(action_frame, text="Save", command=save_to_json_and_csv)
 save_button.grid(row=0, column=0, padx=5)
 
 remove_button = ttk.Button(action_frame, text="Remove", command=remove_appliance)
