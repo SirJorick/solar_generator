@@ -1,60 +1,293 @@
 Appliance,Rated Power (W),Power Factor (PF),Efficiency (%),Surge Power (W)
-Desktop Computer,300,0.95,85,600
-Laptop,50,0.9,90,100
-Cellphone Charger,60,0.9,90,120
-LED TV (32-inch),70,0.9,95,140
-LED TV (40-inch),120,0.9,95,240
-Electric Fan (Table Fan),60,0.9,90,120
-Electric Fan (Ceiling Fan),75,0.9,85,150
-Electric Iron,1200,0.9,90,2500
-Refrigerator (100W),100,0.9,85,300
-Refrigerator (200W),200,0.9,90,400
-Refrigerator (500W),500,0.9,90,1500
-Washing Machine,500,0.9,85,1000
-Blender,500,0.9,85,1000
-Microwave (800W),800,0.85,80,1600
-Microwave (1500W),1500,0.9,85,3000
-Coffee Maker,800,0.9,80,1600
-Hair Dryer,1000,0.85,90,2000
-Electric Kettle,1500,0.95,88,3000
-Air Conditioner (1 HP),1000,0.9,85,3000
-Air Conditioner (2 HP),2000,0.9,85,5000
-Toaster,1000,0.9,85,2000
-Food Processor,900,0.9,85,1800
-Water Pump,250,0.9,85,500
-Electric Water Heater,3000,0.9,85,6000
-Electric Stove,1500,0.9,85,3000
-Cordless Drill,500,0.9,85,1000
-Vacuum Cleaner,700,0.85,90,1400
-Iron (Small),800,0.9,85,1600
-Welding Machine (Inverter),1650,0.9,85,3300
-Electric Heater,1500,0.9,85,3000
-Soldering Iron,60,0.9,90,120
-Digital Camera Charger,10,0.9,95,20
-Air Purifier,200,0.9,85,400
-Fan (Portable),30,0.9,90,60
-LED Light Bulb (10W),10,0.9,95,20
-LED Light Bulb (20W),20,0.9,95,40
-Laptop Charger,45,0.9,90,90
-TV Box,15,0.9,85,30
-Desktop Monitor,60,0.9,90,120
-Game Console,200,0.9,90,400
-Digital TV Receiver,30,0.9,90,60
 Air Compressor (0.5 HP),400,0.92,88,1200
 Air Compressor (1 HP),750,0.9,85,2200
 Air Compressor (2 HP),1500,0.9,85,4500
-Cordless Drill Charger,150,0.9,90,300
-Deep Fryer,1500,0.85,80,3000
+Air Compressor (3 HP),2000,0.92,88,5000
+Air Conditioner (1 HP),1000,0.9,85,3000
+Air Conditioner (2 HP),2000,0.9,85,5000
+Air Conditioner (Mini Split),1200,0.9,90,2400
+Air Conditioner (Window Unit),1000,0.9,85,3000
+Air Duct Cleaner,300,0.9,85,600
+Air Fryer,1500,0.9,90,3000
+Air Purifier,200,0.9,85,400
+All-in-One Desktop,250,0.9,85,500
+Battery Backup UPS (Large),600,0.9,85,1200
+Battery Backup UPS (Medium),300,0.9,85,600
+Battery Backup UPS (Small),100,0.9,85,200
+Beverage Cooler,150,0.9,90,300
+Blender,500,0.9,85,1000
 Blender (300W),300,0.9,85,600
 Blender (500W),500,0.85,85,1000
-Electric Toothbrush,20,0.9,90,40
-Electric Shaver,30,0.9,90,60
-Power Bank Charger,60,0.9,90,120
-Portable Speaker,20,0.9,85,40
-Coffee Grinder,50,0.9,90,100
+Bluetooth Headphones,10,0.9,90,20
+Blu-ray Player,50,0.9,90,100
+Bread Maker,800,0.9,85,1600
+Built-in Coffee Machine,900,0.9,85,1800
+Built-in Microwave,1200,0.9,85,2400
+Built-in Steamer,700,0.9,90,1400
+Capsule Coffee Machine,1000,0.9,85,2000
+Carpet Cleaner,1500,0.9,85,3000
+CCTV Camera,10,0.9,90,20
 Ceiling Fan (Large),100,0.9,85,200
-Induction Cooker,1500,0.9,85,3000
-Pressure Washer,1500,0.9,85,3000
+Cellphone Charger,60,0.9,90,120
+Chest Freezer,300,0.9,85,600
+Coffee Grinder,50,0.9,90,100
+Coffee Maker,800,0.9,80,1600
+Compact Air Conditioner,900,0.9,85,1800
+Compact Dishwasher,1200,0.9,85,2400
+Compact Refrigerator,150,0.9,90,300
+Computer Monitor,40,0.9,90,80
+Conference Speakerphone,30,0.9,90,60
+Convection Microwave,1800,0.9,90,3600
+Convection Oven,2000,0.95,90,4000
+Copier,700,0.9,85,1400
+Corded Power Drill,500,0.9,85,1000
+Cordless Drill,500,0.9,85,1000
+Cordless Drill Charger,150,0.9,90,300
+Cordless Phone,8,0.9,90,16
+Cordless Vacuum,100,0.9,90,200
+Curling Iron,35,0.9,90,70
+Deep Fryer,1500,0.85,80,3000
+Dehumidifier,300,0.9,85,600
+Desk Fan,45,0.9,90,90
+Desk Lamp (LED),15,0.9,90,30
+Desktop Computer,300,0.95,85,600
+Desktop Computer (Gaming),500,0.9,85,1000
+Desktop Computer (Workstation),400,0.9,85,800
+Desktop Monitor,60,0.9,90,120
+Desktop Printer,300,0.9,85,600
+Desktop Scanner,100,0.9,90,200
+Digital Alarm Clock,10,0.9,90,20
+Digital Camera Charger,10,0.9,95,20
+Digital Photo Frame,20,0.9,90,40
+Digital Thermometer,2,0.9,95,4
+Digital TV Receiver,30,0.9,90,60
+Digital Whiteboard,150,0.9,85,300
+Dishwasher,1500,0.9,85,3000
+DVD Player,30,0.9,90,60
+Electric Bidet,200,0.9,85,400
+Electric Bike,500,0.9,85,1000
+Electric Bike Charger,250,0.9,90,500
+Electric Bug Zapper,30,0.9,90,60
+Electric Car Charger (Level 1),1200,0.9,85,2400
+Electric Car Charger (Level 2),2400,0.9,85,4800
+Electric Clothes Dryer,3000,0.9,85,6000
+Electric Clothes Steamer,800,0.9,85,1600
+Electric Door Lock,5,0.9,90,10
+Electric Fan (Ceiling Fan),75,0.9,85,150
+Electric Fan (Table Fan),60,0.9,90,120
+Electric Fireplace,1200,0.9,85,2400
+Electric Food Warmer,600,0.9,85,1200
+Electric Generator (Backup),5000,0.9,85,10000
+Electric Griddle,1500,0.9,85,3000
+Electric Grill,1800,0.9,85,3600
+Electric Heater,1500,0.9,85,3000
+Electric Hedge Trimmer,300,0.9,85,600
+Electric Iron,1200,0.9,90,2500
+Electric Kettle,1500,0.95,88,3000
+Electric Lawn Mower,1500,0.9,85,3000
+Electric Leaf Vacuum,250,0.9,85,500
+Electric Massage Chair,800,0.9,85,1600
+Electric Massage Table,200,0.9,85,400
+Electric Mop,300,0.9,85,600
+Electric Mosquito Killer,20,0.9,90,40
+Electric Oven,2400,0.95,90,5000
+Electric Pencil Sharpener,50,0.9,90,100
+Electric Pressure Cooker,1000,0.9,85,2000
+Electric Pressure Washer,1500,0.9,85,3000
+Electric Radiator,1500,0.9,85,3000
+Electric Rice Cooker (Large),1000,0.9,85,2000
+Electric Sander,300,0.9,90,600
+Electric Saw,1200,0.9,85,2400
+Electric Scissors,50,0.9,90,100
+Electric Scooter,350,0.9,85,700
+Electric Scooter Charger,200,0.9,90,400
+Electric Screwdriver,100,0.9,90,200
+Electric Shaver,30,0.9,90,60
+Electric Shaver (Rechargeable),10,0.9,90,20
+Electric Skillet,1000,0.9,85,2000
+Electric Snow Blower,1200,0.9,85,2400
+Electric Sprinkler System,300,0.9,85,600
+Electric Stove,1500,0.9,85,3000
 Electric Stove (Single Burner),1000,0.9,85,2000
-Electric Water Pump (Small),200,0.9,85,400
+Electric Toothbrush,20,0.9,90,40
+Electric Towel Warmer,250,0.9,85,500
+Electric Water Cooler,300,0.9,90,600
+Electric Water Heater,3000,0.9,85,6000
 Electric Water Pump (Large),1000,0.9,85,2000
+Electric Water Pump (Small),200,0.9,85,400
+Electric Water Pump (Submersible, small),100,0.9,85
+Electric Water Pump (Submersible, large),500,0.9,85
+Electric Wheelchair,300,0.9,85,600
+Electric Window Blinds,20,0.9,90,40
+Electronic Insect Zapper,15,0.9,90,30
+Elliptical Trainer,1500,0.9,85,3000
+Energy Star LED Bulb (12W),12,0.9,95,24
+Energy Star LED Bulb (7W),7,0.9,95,14
+Energy Star LED Bulb (9W),9,0.9,95,18
+eReader,5,0.9,90,10
+Espresso Machine,1200,0.9,85,2400
+Evaporative Air Cooler,150,0.9,90,300
+Exercise Bike,150,0.9,85,300
+External Hard Drive,10,0.9,90,20
+Fan (Portable),30,0.9,90,60
+Fitness Tracker,1,0.9,95,2
+Floor Cleaning Robot,50,0.9,90,100
+Floor Lamp (LED),30,0.9,90,60
+Food Dehydrator,500,0.9,85,1000
+Food Processor,900,0.9,85,1800
+Food Waste Disposer,600,0.9,85,1200
+Front Load Washing Machine,1200,0.9,85,2400
+Full-size Dishwasher,1500,0.9,85,3000
+Game Console,200,0.9,90,400
+Game Console (Xbox),200,0.9,90,400
+Garage Door Opener,400,0.9,85,800
+Garbage Compactor,800,0.9,85,1600
+Garbage Disposal,600,0.9,85,1200
+Garden Shed Lighting,20,0.9,90,40
+Hair Dryer,1000,0.85,90,2000
+Hair Dryer (Ionic),1000,0.9,90,2000
+Hair Straightener,45,0.9,90,90
+Handheld Game Console,15,0.9,90,30
+Hedge Trimmer,300,0.9,85,600
+Home Automation Hub,15,0.9,90,30
+Home Battery Charger,300,0.9,85,600
+Home Gym Multi-Station,500,0.9,85,1000
+Home Intercom System,15,0.9,90,30
+Home Projector,300,0.9,85,600
+Home Security System,50,0.9,90,100
+Home Theater System,500,0.9,85,1000
+Humidifier,50,0.9,90,100
+Ice Cream Maker,500,0.9,85,1000
+Ice Maker,1000,0.9,85,2000
+Induction Cooker,1500,0.9,85,3000
+Induction Pressure Cooker,1500,0.9,90,3000
+Infrared Sauna,3000,0.9,85,6000
+Instant Pot,1000,0.9,85,2000
+Interactive Touchscreen,250,0.9,85,500
+Iron (Small),800,0.9,85,1600
+Juicer,600,0.9,90,1200
+Laminator,100,0.9,90,200
+Landscape Lighting,15,0.9,95,30
+Laptop,50,0.9,90,100
+Laptop Charger,45,0.9,90,90
+Laser Printer,500,0.9,85,1000
+Leaf Blower,800,0.9,85,1600
+LED Desk Lamp,15,0.9,90,30
+LED Flood Light (50W equiv),20,0.9,95,40
+LED Floor Lamp,30,0.9,90,60
+LED Light Bulb (10W),10,0.9,95,20
+LED Light Bulb (20W),20,0.9,95,40
+LED Light Strip (5m),48,0.9,95,96
+LED Outdoor Flood Light,50,0.9,95,100
+LED Panel Light,40,0.9,95,80
+LED Security Light,30,0.9,95,60
+LED Street Light (100W equiv),40,0.9,95,80
+LED Track Lighting,25,0.9,90,50
+LED TV (32-inch),70,0.9,95,140
+LED TV (40-inch),120,0.9,95,240
+Microwave (1500W),1500,0.9,85,3000
+Microwave (800W),800,0.85,80,1600
+Mini PC,50,0.9,90,100
+Modem,15,0.9,90,30
+Motion Sensor Light,8,0.9,95,16
+Multi-cooker,1200,0.9,85,2400
+Network Switch,20,0.9,90,40
+Office Copier,600,0.9,85,1200
+Office Phone,10,0.9,90,20
+Oscillating Fan,70,0.9,90,140
+Outdoor LED Flood Light,50,0.9,95,100
+Outdoor Security Camera,15,0.9,90,30
+Over-the-Range Microwave,1000,0.9,85,2000
+Paper Shredder,200,0.9,85,400
+Personal Air Cooler,40,0.9,90,80
+Portable Air Conditioner,1500,0.9,85,3000
+Portable DVD Player,20,0.9,90,40
+Portable Evaporative Cooler,300,0.9,85,600
+Portable Induction Cooktop,1800,0.95,90,3600
+Portable Speaker,20,0.9,85,40
+Portable Water Filter,50,0.9,90,100
+Power Bank Charger,60,0.9,90,120
+Pressure Washer,1500,0.9,85,3000
+Printer/Scanner Combo,400,0.9,85,800
+Projector,300,0.9,85,600
+Range Hood,250,0.9,90,500
+Rechargeable Handheld Fan,15,0.9,90,30
+Refrigerator (100W),100,0.9,85,300
+Refrigerator (200W),200,0.9,90,400
+Refrigerator (500W),500,0.9,90,1500
+Rice Cooker,700,0.9,90,1400
+Robotic Lawn Mower,200,0.9,85,400
+Robotic Vacuum,100,0.9,90,200
+Rotisserie Oven,1200,0.9,85,2400
+Router,20,0.9,90,40
+Rowing Machine,300,0.9,85,600
+Scanner,100,0.9,90,200
+Security Alarm Siren,30,0.9,90,60
+Slow Cooker,250,0.95,90,500
+Smart CO Detector,5,0.9,90,10
+Smart Doorbell,10,0.9,90,20
+Smart Gas Leak Detector,3,0.9,90,6
+Smart Home Energy Monitor,8,0.9,90,16
+Smart Home Hub,15,0.9,90,30
+Smart Irrigation Controller,15,0.9,90,30
+Smart LED Strip (5m),48,0.9,95,96
+Smart Light Controller,8,0.9,90,16
+Smart Light Switch,1,0.9,95,2
+Smart Lock,5,0.9,90,10
+Smart Mirror,50,0.9,90,100
+Smart Oven,2400,0.95,90,4800
+Smart Oven Toaster,800,0.9,85,1600
+Smart Plug,5,0.9,90,10
+Smart Power Outlet,10,0.9,90,20
+Smart Refrigerator,200,0.9,90,400
+Smart Smoke Detector,5,0.9,90,10
+Smart Speaker,30,0.9,90,60
+Smart Thermostat,5,0.9,90,10
+Smart Water Leak Detector,3,0.9,90,6
+Smartwatch,2,0.9,95,4
+Solar Charger,50,0.9,90,100
+Solar Garden Light,3,0.9,95,6
+Solar-Powered Security Camera,10,0.9,90,20
+Soldering Iron,60,0.9,90,120
+Sous Vide Cooker,800,0.9,90,1600
+Sous Vide Immersion Circulator,1000,0.9,90,2000
+Space Heater,1500,0.9,90,3000
+Steam Cleaner,1200,0.9,85,2400
+Steam Iron,1200,0.9,85,2400
+Steam Shower,2500,0.9,85,5000
+Streaming Device,15,0.9,90,30
+Tablet,15,0.9,90,30
+Tablet Charger,25,0.9,90,50
+Tankless Water Heater,4500,0.9,85,9000
+Toaster,1000,0.9,85,2000
+Toaster Oven,1200,0.9,85,2400
+Top Load Washing Machine,1000,0.9,85,2000
+Tower Fan,60,0.9,90,120
+Treadmill,2000,0.9,85,4000
+TV Box,15,0.9,85,30
+Under Cabinet LED Light,10,0.9,95,20
+Upright Freezer,400,0.9,85,800
+USB Fan,5,0.9,95,10
+Vacuum Cleaner,700,0.85,90,1400
+Vent Hood,200,0.9,90,400
+Virtual Reality Headset,30,0.9,90,60
+Voice Controlled Smart Speaker,30,0.9,90,60
+Waffle Maker,800,0.9,85,1600
+Wall Mounted Fan,75,0.9,90,150
+Washing Machine,500,0.9,85,1000
+Water Boiler,1200,0.9,85,2400
+Water Dispenser (Hot/Cold),300,0.9,90,600
+Water Jet Massager,150,0.9,85,300
+Water Pump,250,0.9,85,500
+Water Purifier,100,0.9,90,200
+Welding Machine (Inverter),1650,0.9,85,3300
+WiFi Extender,10,0.9,90,20
+Window Cleaning Robot,60,0.9,90,120
+Window Fan,60,0.9,90,120
+Wine Cooler,150,0.9,85,300
+Wine Preservation System,100,0.9,90,200
+Wireless Doorbell,10,0.9,90,20
+Wireless Earbuds,5,0.9,95,10
+Wireless Outdoor Speaker,25,0.9,90,50
+Wireless Phone Charger,15,0.9,90,30
+Wireless Weather Station,10,0.9,90,20

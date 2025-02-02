@@ -44,21 +44,16 @@ def save_to_csv():
     try:
         with open(csv_filename, mode='w', newline='') as file:
             writer = csv.writer(file)
-            # Write appliance details header
             writer.writerow(
                 ["Appliance", "Power (W)", "PF", "Eff(%)", "Surge(W)", "Usage (Hrs)", "Count", "Consumption (kWh)"]
             )
-            # Write each appliance row
             for row in tree.get_children():
                 writer.writerow(tree.item(row)['values'])
-            # Write totals for appliances
             writer.writerow([])
             writer.writerow(["Total Wattage", total_wattage])
             avg_usage_time = total_usage_hours / appliance_count if appliance_count else 0
             writer.writerow(["Average Usage Time", f"{avg_usage_time:.2f} hrs"])
             writer.writerow(["Total Consumption (kWh)", f"{total_consumption_kWh:.4f}"])
-
-            # Write solar gen set results summary
             writer.writerow([])
             writer.writerow(["Solar Gen Set Summary", summary_label.cget("text")])
             writer.writerow([])
@@ -68,7 +63,6 @@ def save_to_csv():
     except PermissionError:
         messagebox.showerror("File Error", f"Permission denied when trying to write to '{csv_filename}'. "
                                              "Please ensure the file is not open in another application and that you have write permissions.")
-
 
 def recalc_totals():
     """
@@ -194,7 +188,9 @@ def on_tree_select(event):
 
 def on_tree_double_click(event):
     """
-    Enables inline editing for Appliance and Rated Power cells.
+    Enables inline editing for Appliance (col 0), Rated Power (col 1),
+    and Usage Hours (col 5). When Usage Hours is edited, the consumption
+    (col 7) is recalculated.
     """
     region = tree.identify("region", event.x, event.y)
     if region != "cell":
@@ -205,7 +201,8 @@ def on_tree_double_click(event):
     if not row:
         return
     col_num = int(col.replace("#", "")) - 1
-    if col_num not in (0, 1):
+    # Allow editing for columns 0 (Appliance), 1 (Rated Power), and 5 (Usage Hrs)
+    if col_num not in (0, 1, 5):
         return
 
     x, y, width, height = tree.bbox(row, col)
@@ -216,8 +213,9 @@ def on_tree_double_click(event):
     entry.focus()
 
     def on_focus_out(event):
-        new_value = entry.get()
+        new_value = entry.get().strip()
         current_values = list(tree.item(row, "values"))
+        # For Rated Power (col 1), ensure it's a valid number
         if col_num == 1:
             try:
                 new_val_float = float(new_value)
@@ -226,7 +224,29 @@ def on_tree_double_click(event):
                 messagebox.showwarning("Input Error", "Please enter a valid number for Rated Power (W).")
                 entry.destroy()
                 return
+        elif col_num == 5:
+            # For Usage Hours, update the value and then recalc consumption
+            try:
+                usage = float(new_value)
+                current_values[5] = usage
+            except ValueError:
+                messagebox.showwarning("Input Error", "Please enter a valid number for Usage Hours.")
+                entry.destroy()
+                return
+            # Recalculate consumption for this row:
+            try:
+                rated_power = float(str(current_values[1]).replace(",", ""))
+                count = float(current_values[6])
+                pf = float(current_values[2])
+                efficiency = float(current_values[3]) / 100  # efficiency is in percentage
+                consumption = rated_power * usage * count * pf * efficiency / 1000
+                current_values[7] = f"{consumption:,.4f}"
+            except Exception as e:
+                messagebox.showwarning("Calculation Error", f"Error recalculating consumption: {e}")
+                entry.destroy()
+                return
         else:
+            # For Appliance (col 0), simply update the value.
             current_values[col_num] = new_value
         tree.item(row, values=current_values)
         entry.destroy()
@@ -286,23 +306,20 @@ def calculate_gen_set():
     if scc_selected is None:
         scc_selected = f"> {max(SCC_SIZES)}"
 
-    # --- Refined DC Circuit Breaker Calculation ---
-    # Use a 1.20 safety margin for the total PV current.
+    # DC Circuit Breaker Calculation with a 1.20 margin:
     dc_breaker_required = total_pv_current * 1.20
     dc_breaker_selected = next((dc for dc in sorted(DC_BREAKER_SIZES) if dc >= dc_breaker_required), None)
     if dc_breaker_selected is None:
         dc_breaker_selected = f"> {max(DC_BREAKER_SIZES)}"
 
-    # --- Refined AC Breaker Calculation ---
-    # Calculate the inverter AC current (assuming 230V AC output) and apply 1.25 margin.
+    # AC Breaker Calculation (assuming 230V AC output) with a 1.25 margin:
     inverter_ac_current = (inverter_selected / 230) if isinstance(inverter_selected, (int, float)) else (inverter_required / 230)
     ac_breaker_required = inverter_ac_current * 1.25
     ac_breaker_selected = next((ac for ac in sorted(BREAKER_SIZES) if ac >= ac_breaker_required), None)
     if ac_breaker_selected is None:
         ac_breaker_selected = f"> {max(BREAKER_SIZES)}"
 
-    # --- Refined Cable (Wire) Sizing ---
-    # Calculate the current from the inverter output, then apply a 1.25 margin.
+    # Cable (Wire) Sizing with a 1.25 margin:
     inverter_current = (inverter_selected / system_voltage) if isinstance(inverter_selected, (int, float)) else (inverter_required / system_voltage)
     cable_required = inverter_current * 1.25
     cable_selected = None
@@ -312,6 +329,22 @@ def calculate_gen_set():
             break
     if cable_selected is None:
         cable_selected = f"> {max(CABLE_SIZES)}"
+
+    # --- Active Battery Balancer Calculation ---
+    # Assume the balancer should handle at least 5% of the required battery capacity (in Amps)
+    active_balancer_required = battery_Ah_required * 0.05
+    # Ensure a minimum requirement of 5A is used.
+    active_balancer_required = max(active_balancer_required, 5)
+    active_balancer_selected = next((bal for bal in sorted(ACTIVE_BALANCER_SIZES) if bal >= active_balancer_required), None)
+    if active_balancer_selected is None:
+        active_balancer_selected = f"> {max(ACTIVE_BALANCER_SIZES)}"
+
+    # --- Fuse Calculation ---
+    # Calculate the fuse size based on the inverter current with a 1.25 margin.
+    fuse_required = inverter_current * 1.25
+    fuse_selected = next((f for f in sorted(FUSE_SIZES) if f >= fuse_required), None)
+    if fuse_selected is None:
+        fuse_selected = f"> {max(FUSE_SIZES)}"
 
     # Populate solar_tree with calculation results
     solar_tree.insert("", "end", values=(
@@ -341,6 +374,12 @@ def calculate_gen_set():
     solar_tree.insert("", "end", values=(
         "Cable Size (mm²)", f"{cable_selected}", f"Required Ampacity for {cable_required:.2f}A"
     ))
+    solar_tree.insert("", "end", values=(
+        "Active Balancer (A)", f"{active_balancer_selected}", f"Required: {active_balancer_required:.2f}A"
+    ))
+    solar_tree.insert("", "end", values=(
+        "Fuse Size (A)", f"{fuse_selected}", f"Required: {fuse_required:.2f}A"
+    ))
 
     # Update summary label with key details
     summary_text = (
@@ -348,7 +387,9 @@ def calculate_gen_set():
         f"Panels: {num_panels} ({total_pv_capacity:,.0f}W total) | "
         f"Inverter: {inverter_selected}W | "
         f"MPPT: {mppt_selected}A | "
-        f"SCC: {scc_selected}A"
+        f"SCC: {scc_selected}A | "
+        f"Balancer: {active_balancer_selected}A | "
+        f"Fuse: {fuse_selected}A"
     )
     summary_label.config(text=summary_text)
 
@@ -369,34 +410,38 @@ root.grid_rowconfigure(2, weight=2)
 top_frame = ttk.Frame(root, padding="5")
 top_frame.grid(row=0, column=0, sticky="ew", padx=5, pady=5)
 
+# Appliance Name (editable combobox) - increased width to accommodate 40-45 characters.
 appliance_label = ttk.Label(top_frame, text="Appliance:")
 appliance_label.grid(row=0, column=0, padx=5, pady=2, sticky="w")
 appliance_var = tk.StringVar()
 appliance_combobox = ttk.Combobox(top_frame, textvariable=appliance_var,
-                                  values=appliance_data['Appliance'].tolist(), width=20)
+                                  values=appliance_data['Appliance'].tolist(), width=45)
 appliance_combobox.grid(row=0, column=1, padx=5, pady=2)
 appliance_var.set(appliance_data.iloc[0]['Appliance'])
 appliance_var.trace_add("write", update_fields)
 appliance_combobox.bind("<<ComboboxSelected>>", lambda event: calculate_gen_set())
 appliance_combobox.bind("<KeyRelease>", on_combobox_keyrelease)
 
+# Rated Power combobox with adjusted width.
 rated_power_label = ttk.Label(top_frame, text="Rated Power (W):")
 rated_power_label.grid(row=0, column=2, padx=5, pady=2, sticky="w")
-rated_power_combobox = ttk.Combobox(top_frame, width=8)
+rated_power_combobox = ttk.Combobox(top_frame, width=10)
 rated_power_combobox.grid(row=0, column=3, padx=5, pady=2)
 rated_power_combobox.set(appliance_data.iloc[0]['Rated Power (W)'])
 
+# Usage Hours combobox with adjusted width.
 usage_hours_label = ttk.Label(top_frame, text="Usage Hours:")
 usage_hours_label.grid(row=0, column=4, padx=5, pady=2, sticky="w")
-usage_hours_combobox = ttk.Combobox(top_frame, values=[str(i) for i in range(1, 25)], width=5)
+usage_hours_combobox = ttk.Combobox(top_frame, values=[str(i) for i in range(1, 25)], width=8)
 usage_hours_combobox.grid(row=0, column=5, padx=5, pady=2)
 usage_hours_combobox.set("6")
 usage_hours_combobox.bind("<<ComboboxSelected>>", lambda event: recalc_totals())
 usage_hours_combobox.bind("<KeyRelease>", lambda event: recalc_totals())
 
+# Appliance Count combobox with adjusted width.
 counts_label = ttk.Label(top_frame, text="Count:")
 counts_label.grid(row=0, column=6, padx=5, pady=2, sticky="w")
-counts_combobox = ttk.Combobox(top_frame, values=[str(i) for i in range(1, 21)], width=5)
+counts_combobox = ttk.Combobox(top_frame, values=[str(i) for i in range(1, 21)], width=8)
 counts_combobox.grid(row=0, column=7, padx=5, pady=2)
 counts_combobox.set("1")
 counts_combobox.bind("<<ComboboxSelected>>", lambda event: recalc_totals())

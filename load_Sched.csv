@@ -1,9 +1,21 @@
 Appliance,Power (W),PF,Eff(%),Surge(W),Usage (Hrs),Count,Consumption (kWh)
+Microwave (1500W),"1,500.0",0.90,85,"3,000.0",1.0,1,1.1475
 
-Total Wattage,0
-Average Usage Time,0.00 hrs
-Total Consumption (kWh),0.0000
+Total Wattage,1500.0
+Average Usage Time,1.00 hrs
+Total Consumption (kWh),1.1475
 
-Solar Gen Set Summary,
+Solar Gen Set Summary,"Battery: 24.0V, 115Ah | Panels: 12 (1,200W total) | Inverter: 2000W | MPPT: 50A | SCC: 50A | Balancer: 10A | Fuse: 120A"
 
 Solar Component,Requirement/Selection,Details
+Daily Consumption (Wh),"1,148",From appliance loads
+Battery Capacity (Ah),115,"24.0V, DOD: 50.0%"
+Inverter Size (W),2000,"Required: 1,875W"
+PV Array Capacity (W),"1,200",12 panels @ 100.0W each
+MPPT Controller (A),50,Total PV Current: 50.00A
+Charge Controller (A),50,Total PV Current: 50.00A
+DC Circuit Breaker (A),60,Required: 60.00A
+AC Circuit Breaker (A),15,Inverter AC Current: 8.70A
+Cable Size (mm²),70,Required Ampacity for 104.17A
+Active Balancer (A),10,Required: 5.74A
+Fuse Size (A),120,Required: 104.17A
