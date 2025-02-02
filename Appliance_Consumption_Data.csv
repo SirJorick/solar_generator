@@ -1,5 +1,0 @@
-Appliance,Rated Power (W),Power Factor (PF),Efficiency (%),Surge Power (W),Usage Hours,Appliance Count,Consumption (kWh)
-LED TV (40-inch),120.0,0.90,95,240.0,6.0,1,0.6156
-Electric Fan (Table Fan),60.0,0.90,90,120.0,6.0,1,0.2916
-Refrigerator (100W),100.0,0.90,85,300.0,13.0,1,0.9945
-Desktop Computer,300.0,0.95,85,600.0,8.0,1,1.9380
