@@ -1,7 +1,9 @@
 Appliance,Power (W),PF,Eff(%),Surge(W),Usage (Hrs),Count,Consumption (kWh)
-Desktop Computer,300.0,0.95,85,600.0,6.0,1,1.4535
-Desktop ,360.0,1.00,100,360.0,6.0,1,2.1600
 
-Total Wattage,660.0
-Average Usage Time,6.00 hrs
-Total Consumption (kWh),3.6135
+Total Wattage,0
+Average Usage Time,0.00 hrs
+Total Consumption (kWh),0.0000
+
+Solar Gen Set Summary,
+
+Solar Component,Requirement/Selection,Details
