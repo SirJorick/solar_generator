@@ -1,0 +1,24 @@
+Country: Philippines
+
+Optimal Orientation: South
+Efficiency: 90%
+Inclination: 10?-15?
+Harvest Length: 6 months
+Solar Irradiance: 5.0 kWh/m?
+AC Voltage: 230V
+Frequency: 60Hz
+Seasonal Period: Year-round
+Weather Conditions: Tropical, with rainy season from June to November
+
+Voltage: 12.0V
+Efficiency: 17.0%
+Usage Hours: 12.0 hrs
+DOD: 50.0%
+Panel Size: 100.0W
+Battery Capacity: 200.0Ah
+
+Input Wattage: 800.0W
+Harvest/Panel: 459.00W
+Total Panels Required: 2.0
+
+Total Battery Power: 1020.00 Watt-hours

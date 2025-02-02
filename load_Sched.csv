@@ -1,5 +1,7 @@
-Appliance,Rated Power (W),Power Factor (PF),Efficiency (%),Surge Power (W),Usage Hours,Appliance Count,Consumption (kWh)
+Appliance,Power (W),PF,Eff(%),Surge(W),Usage (Hrs),Count,Consumption (kWh)
 Desktop Computer,300.0,0.95,85,600.0,6.0,1,1.4535
-Laptop,50.0,0.90,90,100.0,6.0,1,0.2430
-LED TV (32-inch),70.0,0.90,95,140.0,6.0,1,0.3591
-Electric Fan (Table Fan),60.0,0.90,90,120.0,13.0,10,6.3180
+Desktop ,360.0,1.00,100,360.0,6.0,1,2.1600
+
+Total Wattage,660.0
+Average Usage Time,6.00 hrs
+Total Consumption (kWh),3.6135
