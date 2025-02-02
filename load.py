@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 import pandas as pd
 import tkinter.messagebox as messagebox
+import json
 
 # Load appliance data from CSV
 appliance_data = pd.read_csv('Appliances.csv')
@@ -192,11 +193,45 @@ def remove_appliance():
     for item in selected_items:
         tree.delete(item)
 
-# Function to save the tree data to a CSV file with validation and popup confirmation
+
 def save_to_csv():
+    # Disable the Save button to prevent multiple triggers
+    save_button.config(state="disabled")
+
     # Check if there are any rows in the Treeview
     if not tree.get_children():
         messagebox.showwarning("No Data", "There are no appliances to save.")
+        save_button.config(state="normal")
+        return
+
+    # Get all rows from the Treeview
+    rows = [tree.item(row)['values'] for row in tree.get_children()]
+
+    # Convert to DataFrame and save as CSV
+    df = pd.DataFrame(
+        rows,
+        columns=[
+            "Appliance", "Rated Power (W)", "Power Factor (PF)", "Efficiency (%)",
+            "Surge Power (W)", "Usage Hours", "Appliance Count", "Consumption (kWh)"
+        ]
+    )
+    try:
+        df.to_csv("load_Sched.csv", index=False)
+
+        # Calculate average usage hours
+        average_usage_time = total_usage_hours / appliance_count if appliance_count else 0
+
+        # Prepare the totals data dictionary for JSON
+        data = {
+            "total_wattage": total_wattage,
+            "average_usage_hours": average_usage_time
+        }
+        # Save the totals to total_load.json
+        with open("total_load.json", "w") as f:
+            json.dump(data, f)
+    except Exception as e:
+        messagebox.showerror("Error", f"An error occurred while saving the data: {e}")
+        save_button.config(state="normal")
         return
 
     # Get all rows from the Treeview
